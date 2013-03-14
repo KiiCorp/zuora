@@ -463,6 +463,7 @@
 							<element minOccurs="0" name="EffectiveStartDate" nillable="true" type="dateTime"  />
 							<element minOccurs="0" name="Name" nillable="true" type="string" />
 							<element minOccurs="0" name="SKU" nillable="true" type="string" />
+							<element minOccurs="0" name="Country__c" nillable="true" type="string" />
 			               	<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
 			               	<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime"  />
 						</sequence>
@@ -480,6 +481,8 @@
 							<element minOccurs="0" name="EffectiveStartDate" nillable="true" type="dateTime" />
 							<element minOccurs="0" name="Name" nillable="true" type="string" />
 							<element minOccurs="0" name="ProductId" nillable="true" type="zns:ID" />
+							<element minOccurs="0" name="CouponCode__c" nillable="true" type="string" />
+							<element minOccurs="0" name="CustomPlan__c" nillable="true" type="string" />
                				<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
                				<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime"  />
 						</sequence>
