@@ -681,6 +681,8 @@
 			               	<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime"  />
 							<element minOccurs="0" name="Version" nillable="true" type="int" />
 							<element minOccurs="0" name="InvoiceOwnerId" nillable="true" type="zns:ID" />							 
+							<element minOccurs="0" name="AppName__c" nillable="true" type="string" />
+							<element minOccurs="0" name="AppId__c" nillable="true" type="string" />
 						</sequence>
 					</extension>
 				</complexContent>
