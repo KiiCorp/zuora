@@ -34,6 +34,9 @@ module Zuora::Objects
     end
     # get all the records
     def self.all
+      if self == Zuora::Objects::ProductRatePlanChargeTier
+        unselectable_attributes = [:discount_amount, :discount_percentage]
+      end
       keys = (attributes - unselectable_attributes).map(&:to_s).map(&:zuora_camelize)
       sql = "select #{keys.join(', ')} from #{remote_name}"
 
@@ -86,6 +89,9 @@ module Zuora::Objects
     # is not supported as it requires an actual db connection to
     # generate the sql queries. This may be overcome in the future.
     def self.where(where)
+      if self == Zuora::Objects::ProductRatePlanChargeTier
+        unselectable_attributes = [:discount_amount, :discount_percentage]
+      end
       keys = (attributes - unselectable_attributes).map(&:to_s).map(&:zuora_camelize)
       if where.is_a?(Hash)
         # FIXME: improper inject usage.
