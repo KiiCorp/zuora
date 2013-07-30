@@ -34,7 +34,7 @@ module Zuora::Objects
     end
     # get all the records
     def self.all
-      unselectable_attributes = []
+      unselectable_attributes = [:active_currencies, :product_rate_plan_charge_tier_data]
       if self == Zuora::Objects::ProductRatePlanChargeTier
         unselectable_attributes = [:discount_amount, :discount_percentage]
       end
@@ -91,7 +91,7 @@ module Zuora::Objects
     # is not supported as it requires an actual db connection to
     # generate the sql queries. This may be overcome in the future.
     def self.where(where)
-      unselectable_attributes = []
+      unselectable_attributes = [:active_currencies, :product_rate_plan_charge_tier_data]
       if self == Zuora::Objects::ProductRatePlanChargeTier
         unselectable_attributes = [:discount_amount, :discount_percentage]
       end
