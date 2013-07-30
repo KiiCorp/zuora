@@ -34,11 +34,28 @@ module Zuora::Objects
     end
     # get all the records
     def self.all
-      unselectable_attributes = [:active_currencies, :product_rate_plan_charge_tier_data]
-      if self == Zuora::Objects::ProductRatePlanChargeTier
-        unselectable_attributes = [:discount_amount, :discount_percentage]
-      end
       
+      case 
+      when self == Zuora::Objects::PaymentMethod
+        unselectable_attributes = [:ach_account_number, :credit_card_number, :credit_card_security_code, :gateway_option_data, :skip_validation]
+      when self == Zuora::Objects::ProductRatePlan
+        unselectable_attributes = [:active_currencies]
+      when self == Zuora::Objects::ProductRatePlanCharge
+        unselectable_attributes = [:product_rate_plan_charge_tier_data]
+      when self == Zuora::Objects::ProductRatePlanChargeTier
+        unselectable_attributes = [:discount_amount, :discount_percentage]
+      when self == Zuora::Objects::Payment
+        unselectable_attributes = [:applied_invoice_amount, :gateway_option_data, :invoice_id, :invoice_number]
+      when self == Zuora::Objects::Amendment
+        unselectable_attributes = [:rate_plan_data]
+      when self == Zuora::Objects::Invoice
+        unselectable_attributes = [:regenerate_invoice_pdf]
+      when self == Zuora::Objects::Usage
+        unselectable_attributes = [:invoice_id, :invoice_number]
+      else
+        unselectable_attributes = []
+      end
+
       keys = (attributes - unselectable_attributes).map(&:to_s).map(&:zuora_camelize)
       sql = "select #{keys.join(', ')} from #{remote_name}"
 
@@ -91,10 +108,28 @@ module Zuora::Objects
     # is not supported as it requires an actual db connection to
     # generate the sql queries. This may be overcome in the future.
     def self.where(where)
-      unselectable_attributes = [:active_currencies, :product_rate_plan_charge_tier_data]
-      if self == Zuora::Objects::ProductRatePlanChargeTier
+
+      case 
+      when self == Zuora::Objects::PaymentMethod
+        unselectable_attributes = [:ach_account_number, :credit_card_number, :credit_card_security_code, :gateway_option_data, :skip_validation]
+      when self == Zuora::Objects::ProductRatePlan
+        unselectable_attributes = [:active_currencies]
+      when self == Zuora::Objects::ProductRatePlanCharge
+        unselectable_attributes = [:product_rate_plan_charge_tier_data]
+      when self == Zuora::Objects::ProductRatePlanChargeTier
         unselectable_attributes = [:discount_amount, :discount_percentage]
+      when self == Zuora::Objects::Payment
+        unselectable_attributes = [:applied_invoice_amount, :gateway_option_data, :invoice_id, :invoice_number]
+      when self == Zuora::Objects::Amendment
+        unselectable_attributes = [:rate_plan_data]
+      when self == Zuora::Objects::Invoice
+        unselectable_attributes = [:regenerate_invoice_pdf]
+      when self == Zuora::Objects::Usage
+        unselectable_attributes = [:invoice_id, :invoice_number]
+      else
+        unselectable_attributes = []
       end
+
       keys = (attributes - unselectable_attributes).map(&:to_s).map(&:zuora_camelize)
       if where.is_a?(Hash)
         # FIXME: improper inject usage.
