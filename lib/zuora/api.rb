@@ -40,7 +40,11 @@ module Zuora
       Savon.configure do |savon|
         savon.logger = opts[:logger]
         savon.log = opts[:logger] ? true : false
+        savon.soap_version = 2
+        savon.pretty_print_xml = true
+        savon.log_level = :info
       end
+      @client = nil
       @@config = opts
     end
 
@@ -108,9 +112,6 @@ module Zuora
     private
 
     def initialize
-      Savon.configure do |savon|
-        savon.soap_version = 2
-      end
     end
 
     def make_client
