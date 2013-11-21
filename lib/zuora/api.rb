@@ -13,10 +13,6 @@ module Zuora
     Api.instance.config = Config.new(opts)
     HTTPI.logger = opts[:logger]
     HTTPI.log = opts[:logger] ? true : false
-    Savon.configure do |savon|
-      savon.logger = opts[:logger]
-      savon.log = opts[:logger] ? true : false
-    end
 
     if Api.instance.config.sandbox
       Api.instance.sandbox!
@@ -35,7 +31,19 @@ module Zuora
     attr_accessor :session
 
     # @return [Zuora::Config]
-    attr_accessor :config
+#    attr_accessor :config
+    def config
+      @@config
+    end
+
+    def config= opts
+      Savon.configure do |savon|
+        savon.logger = opts[:logger]
+        savon.log = opts[:logger] ? true : false
+      end
+      @@config = opts
+    end
+
 
 #    WSDL = File.expand_path('../../../wsdl/zuora.a.47.1.wsdl.xml', __FILE__)
     WSDL = File.expand_path('../../../wsdl/zuora.a.48.0.wsdl', __FILE__)
