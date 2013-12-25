@@ -117,7 +117,6 @@ module Zuora
     def make_client
       Savon::Client.new do
         wsdl.document = WSDL
-        http.auth.ssl.verify_mode = :none
       end
     end
 
