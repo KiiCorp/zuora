@@ -28,7 +28,6 @@ module Zuora::Objects
     validates_inclusion_of :billing_period_alignment, :in => BILLING_PERIOD_ALIGNMENTS
     validates_inclusion_of :charge_model, :in => CHARGE_MODELS
     validates_inclusion_of :charge_type, :in => CHARGE_TYPES
-    validates_inclusion_of :tax_mode, :in => TAX_MODES
     validates_numericality_of :default_quantity, :if => Proc.new { |prpc| prpc.charge_model == 'Per Unit Pricing' }
     validates_length_of :description, :maximum => 500, :allow_nil => true
     validates_numericality_of :included_units, :if => Proc.new { |prpc| INCLUDED_UNITS.include?(prpc.charge_model) }
